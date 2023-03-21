@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "小鹅通管理台",
+  "version": "1.0.0",
+  "description": "leozeng",
+  "icons": {
+    "16": "images/icon1.png",
+    "32": "images/icon1.png",
+    "48": "images/icon1.png",
+    "128": "images/icon1.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://music.yandex.ru/;"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "tts",
+    "notifications"
+  ],
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["static/css/chunk-vendors.css"],
+      "js": ["static/js/app.js", "static/js/chunk-vendors.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*.png"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "homepage_url": "https://www.baidu.com/"
+}

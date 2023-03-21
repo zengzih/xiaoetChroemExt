@@ -1,0 +1,5 @@
+[
+    { "label": "小鹅通小店", "route": "t/channel_self/shop#/goods-manage" },
+    { "label": "视频号小店", "route": "t/channel_shop#/goods-manage" },
+    { "label": "全部订单", "route": "t/ecommerce/order/order_list" }
+]
