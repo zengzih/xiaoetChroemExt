@@ -1,6 +1,8 @@
+
 // eslint-disable-next-line
 chrome?.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
-    const { url, host, shopUrl, created } = data;
+    console.log(chrome, sender, sendResponse);
+    const { url, host, shopUrl, created, isChange } = data;
     return fetch(url).then(async res=>  {
         const resp = await res.text();
         const { code, data }  = JSON.parse(resp);
@@ -13,9 +15,20 @@ chrome?.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
                     chrome?.runtime.sendMessage({ appId: match[1] })
                 }
             } else {
-                // chrome.tabs.create({ url: host + `/${shopUrl}` })
-                // eslint-disable-next-line
-                chrome?.tabs.update(undefined, { url: `${host}/${shopUrl}` })
+                if (isChange) {
+                    // eslint-disable-next-line 
+                    chrome?.tabs.update(undefined, { url: `${host}/t/merchant/index` });
+                    // eslint-disable-next-line 
+                    chrome?.tabs.onUpdated.addListener((tabId, changeInfo, tab)=> {
+                        if (/merchant\/index/.test(changeInfo.url)) {
+                            // eslint-disable-next-line 
+                            chrome?.tabs.update(undefined, { url: `${host}/${shopUrl}` })
+                        }
+                    })
+                } else {
+                    // eslint-disable-next-line
+                    chrome?.tabs.update(undefined, { url: `${host}/${shopUrl}` })
+                }
             }
         }
     })

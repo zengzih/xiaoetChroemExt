@@ -29,6 +29,7 @@ export default {
             selectVal: '',
             appId: "",
             chromePromise: null,
+            oldAppId: ''
         };
     },
     
@@ -38,6 +39,7 @@ export default {
         chrome?.runtime.onMessage.addListener(async (data) => {
             if (data.appId) {
                 this.appId = data.appId;
+                this.oldAppId = data.appId;
             }
         });
         this.getAppId();
@@ -98,6 +100,11 @@ export default {
         },
         
         handleRun() {
+            let isChange = false;
+            if (this.oldAppId && this.oldAppId !== this.appId) {
+                isChange = true;
+            }
+            this.oldAppId = this.appId;
             this.chromeTabs().then(tabs => {
                 const host = this.getLocationHost(tabs[0].url);
                 if (host) {
@@ -105,6 +112,8 @@ export default {
                     this.chromeSend({
                         url,
                         host,
+                        appId: this.appId,
+                        isChange,
                         shopUrl: this.selectVal,
                     });
                 }
