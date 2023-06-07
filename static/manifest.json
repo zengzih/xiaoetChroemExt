@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "小鹅通管理台",
+  "name": "视频号助手",
   "version": "1.0.0",
   "description": "leozeng",
   "icons": {
-    "16": "images/icon1.png",
-    "32": "images/icon1.png",
-    "48": "images/icon1.png",
-    "128": "images/icon1.png"
+    "16": "images/img.png",
+    "32": "images/img.png",
+    "48": "images/img.png",
+    "128": "images/img.png"
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://music.yandex.ru/;"

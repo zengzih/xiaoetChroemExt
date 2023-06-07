@@ -30,7 +30,6 @@ const moveBackground = ()=> {
     const descPath = path.join(__dirname, '..', 'chromeExtensions/background/index.js');
     fs.copyFileSync(sourcePath, descPath)
     fs.copyFileSync(path.join(__dirname, '..', 'static/manifest.json'), path.join(__dirname, '..', 'chromeExtensions/manifest.json'))
-    fs.copyFileSync(path.join(__dirname, '..', 'src/routeConfig.json'), path.join(__dirname, '..', 'chromeExtensions/static/routeConfig.json'))
 };
 
 const copyImgs = ()=> {
